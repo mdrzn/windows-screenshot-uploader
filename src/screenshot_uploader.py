@@ -26,7 +26,7 @@ except ImportError:
 try:
     import pystray
     from pystray import MenuItem, Menu
-    from PIL import Image
+    from PIL import Image, ImageDraw
 except ImportError:
     print("ERROR: Required packages not installed. Run 'pip install -r requirements.txt'")
     sys.exit(1)
@@ -80,7 +80,7 @@ class ScreenshotUploader:
                 config = json.load(f)
             
             # Validate required fields
-            required_fields = ['ssh_host', 'ssh_user', 'ssh_key_path', 'remote_path', 'base_url']
+            required_fields = ['ssh_host', 'ssh_user', 'ssh_key_path', 'remote_path']
             for field in required_fields:
                 if field not in config:
                     raise ValueError(f"Missing required field: {field}")
@@ -92,10 +92,9 @@ class ScreenshotUploader:
             sys.exit(1)
 
     def create_icon_image(self, status="ready"):
-        """Create icon image based on status"""
-        # Use different colored circles for different statuses
+        """Create simple colored circle icon based on status"""
         colors = {
-            "ready": (0, 150, 0),      # Green
+            "ready": (0, 200, 0),      # Green
             "uploading": (255, 165, 0), # Orange  
             "error": (220, 20, 60),     # Red
             "paused": (128, 128, 128)   # Gray
@@ -104,20 +103,12 @@ class ScreenshotUploader:
         color = colors.get(status, colors["ready"])
         img = Image.new('RGB', (64, 64), (255, 255, 255))
         draw = ImageDraw.Draw(img)
-        
-        # Draw circle
-        draw.ellipse([8, 8, 56, 56], fill=color)
-        # Draw camera symbol (simple rectangle)
-        draw.rectangle([24, 28, 40, 36], fill=(255, 255, 255))
-        # Draw lens
-        draw.ellipse([28, 24, 36, 32], outline=(255, 255, 255), width=2)
+        draw.ellipse([4, 4, 60, 60], fill=color)
         
         return img
 
     def create_tray_icon(self):
         """Create system tray icon"""
-        from PIL import ImageDraw
-        
         icon_image = self.create_icon_image("ready")
         
         menu = Menu(
@@ -192,16 +183,15 @@ class ScreenshotUploader:
             remote_file_path = self.upload_via_ssh(temp_path, filename)
             
             if remote_file_path:
-                # Put remote URL in clipboard
-                remote_url = f"{self.config['base_url']}/{filename}"
-                self.set_clipboard_text(remote_url)
-                self.logger.info(f"Upload successful. URL copied to clipboard: {remote_url}")
-                self.show_notification("Upload Complete", f"Screenshot uploaded!\nURL copied to clipboard")
+                # Put remote file path in clipboard
+                self.set_clipboard_text(remote_file_path)
+                self.logger.info(f"Upload successful. Path copied to clipboard: {remote_file_path}")
+                self.show_notification("Upload Complete", f"Screenshot uploaded!\nPath copied to clipboard")
                 
                 # Clean up temp file
                 temp_path.unlink()
                 
-                return remote_url
+                return remote_file_path
             
         except Exception as e:
             self.logger.error(f"Upload failed: {e}")
