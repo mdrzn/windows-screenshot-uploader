@@ -33,7 +33,7 @@ A Windows tray application that automatically monitors your clipboard for screen
 
 1. **Clone or download this repository**
    ```cmd
-   git clone https://github.com/yourusername/windows-screenshot-uploader.git
+   git clone https://github.com/mdrzn/windows-screenshot-uploader.git
    cd windows-screenshot-uploader
    ```
 
@@ -65,7 +65,7 @@ Edit `config.json` with your server details:
   "ssh_host": "your-server.example.com",
   "ssh_port": 22,
   "ssh_user": "your-username",
-  "ssh_key_path": "C:\\Users\\YourUsername\\.ssh\\id_rsa",
+  "ssh_key_path": "C:\\Users\\mdrzn\\.ssh\\id_rsa",
   "remote_path": "/path/to/remote/screenshots",
   "base_url": "https://your-server.example.com/screenshots",
   "check_interval": 1,
@@ -100,7 +100,7 @@ Edit `config.json` with your server details:
 
 3. **Test SSH connection**:
    ```cmd
-   ssh -i C:\Users\YourUsername\.ssh\id_rsa your-username@your-server.example.com
+   ssh -i C:\Users\mdrzn\.ssh\id_rsa your-username@your-server.example.com
    ```
 
 ## Usage
@@ -231,6 +231,6 @@ MIT License - see LICENSE file for details.
 
 ## Support
 
-- 🐛 [Report Issues](https://github.com/yourusername/windows-screenshot-uploader/issues)
-- 💡 [Feature Requests](https://github.com/yourusername/windows-screenshot-uploader/issues)
-- 📖 [Documentation](https://github.com/yourusername/windows-screenshot-uploader/wiki)
+- 🐛 [Report Issues](https://github.com/mdrzn/windows-screenshot-uploader/issues)
+- 💡 [Feature Requests](https://github.com/mdrzn/windows-screenshot-uploader/issues)
+- 📖 [Documentation](https://github.com/mdrzn/windows-screenshot-uploader/wiki)
