@@ -1,0 +1,5 @@
+pystray>=0.19.4
+pillow>=9.0.0
+pywin32>=306
+paramiko>=2.11.0
+plyer>=2.1.0
