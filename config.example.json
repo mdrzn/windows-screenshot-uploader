@@ -1,0 +1,11 @@
+{
+  "ssh_host": "your-server.example.com",
+  "ssh_port": 22,
+  "ssh_user": "your-username",
+  "ssh_key_path": "C:\\Users\\YourUsername\\.ssh\\id_rsa",
+  "remote_path": "/path/to/remote/screenshots",
+  "base_url": "https://your-server.example.com/screenshots",
+  "check_interval": 1,
+  "auto_cleanup": true,
+  "notification_enabled": true
+}
