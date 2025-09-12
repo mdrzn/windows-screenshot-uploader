@@ -17,8 +17,8 @@ A Windows tray application that automatically monitors your clipboard for screen
 1. Take a screenshot using Windows built-in tools (Win+Shift+S, Snipping Tool, etc.)
 2. The application detects the new image in your clipboard
 3. Image is uploaded to your remote server via SSH
-4. Remote URL is copied to your clipboard
-5. Paste the URL directly into Claude Code
+4. Remote file path is copied to your clipboard
+5. Paste the file path directly into Claude Code
 
 ## Requirements
 
@@ -66,8 +66,7 @@ Edit `config.json` with your server details:
   "ssh_port": 22,
   "ssh_user": "your-username",
   "ssh_key_path": "C:\\Users\\YourUsername\\.ssh\\id_rsa",
-  "remote_path": "/path/to/remote/screenshots",
-  "base_url": "https://your-server.example.com/screenshots",
+  "remote_path": "/tmp/screenshots",
   "check_interval": 1,
   "auto_cleanup": true,
   "notification_enabled": true
@@ -81,7 +80,6 @@ Edit `config.json` with your server details:
 - **ssh_user**: Your username on the remote server
 - **ssh_key_path**: Path to your private SSH key file
 - **remote_path**: Directory on remote server to store screenshots
-- **base_url**: Public URL where screenshots will be accessible
 - **check_interval**: How often to check clipboard (seconds)
 - **auto_cleanup**: Whether to delete local temp files after upload
 - **notification_enabled**: Show system notifications
@@ -137,28 +135,13 @@ Right-click the tray icon for options:
 Your remote server needs:
 
 1. **SSH access** with key authentication
-2. **Web server** serving the screenshots directory
-3. **Proper permissions** for the upload directory
-
-### Example Nginx Configuration
-
-```nginx
-server {
-    listen 443 ssl;
-    server_name your-server.example.com;
-    
-    location /screenshots/ {
-        alias /path/to/remote/screenshots/;
-        autoindex off;
-    }
-}
-```
+2. **Proper permissions** for the upload directory
 
 ### Create Upload Directory
 
 ```bash
-mkdir -p /path/to/remote/screenshots
-chmod 755 /path/to/remote/screenshots
+mkdir -p /tmp/screenshots
+chmod 755 /tmp/screenshots
 ```
 
 ## Auto-Startup
