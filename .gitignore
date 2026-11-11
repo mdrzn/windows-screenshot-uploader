@@ -1,5 +1,7 @@
 # Configuration files (contains sensitive data)
 config.json
+config.json.backup
+*.json.backup
 
 # Python
 __pycache__/
