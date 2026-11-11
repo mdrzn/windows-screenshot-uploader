@@ -3,7 +3,12 @@ config.json
 config.json.backup
 *.json.backup
 
-# Python
+# Build (.NET)
+app/bin/
+app/obj/
+dist/
+
+# Python (legacy/)
 __pycache__/
 *.py[cod]
 *$py.class
