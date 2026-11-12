@@ -5,6 +5,11 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2026-11-12
+
+### Fixed
+- Images copied together with their file were ignored, with nothing in the log: Snipping Tool (<kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>) with automatic saving and the clipboard history (<kbd>Win</kbd>+<kbd>V</kbd>) put the image and the saved file in the clipboard. The image now counts; files copied in Explorer, which carry no image data, are still ignored.
+
 ## [2.0.0] - 2026-11-11
 
 ### Added

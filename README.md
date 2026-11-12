@@ -4,7 +4,7 @@ Take a screenshot on Windows, get a path you can paste straight into a remote Cl
 
 ![Platform](https://img.shields.io/badge/platform-Windows_10%2F11-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Version](https://img.shields.io/badge/version-2.0.0-orange.svg)
+![Version](https://img.shields.io/badge/version-2.0.1-orange.svg)
 
 > 🍎 **On a Mac?** The Mac equivalent is at [**mdrzn/claude-screenshot-uploader**](https://github.com/mdrzn/claude-screenshot-uploader).
 

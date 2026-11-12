@@ -50,7 +50,7 @@ sealed class MessageWindow : NativeWindow, IDisposable
 
 static class Clip
 {
-    const uint CF_BITMAP = 2, CF_UNICODETEXT = 13, CF_HDROP = 15;
+    const uint CF_BITMAP = 2, CF_UNICODETEXT = 13;
     static readonly uint CF_PNG = RegisterClipboardFormat("PNG");
     static readonly uint CF_OWN = RegisterClipboardFormat("ScreenshotUploader.Path"); // marca il testo scritto da noi
 
@@ -58,8 +58,10 @@ static class Clip
     public static uint Sequence => GetClipboardSequenceNumber();
     public static bool IsOwn => IsClipboardFormatAvailable(CF_OWN);
     // Immagine vera: non il nostro percorso e non file copiati da Esplora risorse
-    public static bool HasImage => !IsOwn && !IsClipboardFormatAvailable(CF_HDROP)
-                                   && (IsClipboardFormatAvailable(CF_PNG) || IsClipboardFormatAvailable(CF_BITMAP));
+    // Conta l'immagine anche se accanto c'e' il suo file (CF_HDROP): lo Strumento di cattura con il
+    // salvataggio automatico e la cronologia degli appunti copiano entrambi. I file copiati da Esplora
+    // risorse non hanno dati immagine, quindi restano esclusi comunque.
+    public static bool HasImage => !IsOwn && (IsClipboardFormatAvailable(CF_PNG) || IsClipboardFormatAvailable(CF_BITMAP));
 
     // L'immagine negli appunti come PNG (il formato "PNG" se c'e', altrimenti la bitmap); null se non c'e'
     public static byte[]? ReadImage(IntPtr owner)
